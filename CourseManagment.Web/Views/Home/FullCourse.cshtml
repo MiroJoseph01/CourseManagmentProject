@@ -1,0 +1,67 @@
+﻿@model CourseManagment.Web.Models.HomeViewModels.CourseViewModel
+
+@{
+    ViewBag.Title = "FullCourse";
+}
+
+<header class="jumbotron bg-dark rounded-0 text-light">
+
+    <h1 class="text-center">@Model.CourseName</h1>
+</header>
+@if (!string.IsNullOrEmpty(Model.ImageName))
+{
+    <div class="row myRow justify-content-center">
+        <div class="img_wrap">
+            @Html.Raw($"<img class='img-fluid' alt={Model.ImageName} src=\"data:image/jpeg;base64,"
+                                     + Convert.ToBase64String(Model.Image) + "\" />")
+        </div>
+    </div>
+}
+
+<div class="row myRow">
+    <div class="col-12 rounded">
+        <span> @Model.Description </span>
+    </div>
+</div>
+
+<div class="row myRow">
+    <div class="col-3 rounded">
+
+        <h2>Term: @Model.ForTerm</h2>
+
+
+    </div>
+    <div class="col-3 my-col rounded">
+        <h2>Course Lecturer:</h2>
+        <h2>
+            @Html.ActionLink(@Model.Lecturer.FirstName + " " + @Model.Lecturer.SecondName, "AboutLecturer", "Home",
+      new { id = Model.Lecturer.LecturerId }, new { @class = "nav-link active text-center text-dark bg-light" })
+    </h2>
+</div>
+<div class="col-3 rounded">
+    <h2>Course Topics:</h2>
+    <ul>
+        @foreach (var i in Model.Topics)
+        {
+            <li class="float-left list-group-item-dark list-unstyled">
+                @Html.ActionLink(@i.TopicName, "Tags", "Home", new { id = i.TopicId.ToString() }, new { @class = "nav-link text-center text-dark bg-light" })
+            </li>
+        }
+    </ul>
+</div>
+<div class="col-3 my-col rounded">
+    <h2>Number Of Students: @Model.NumberOfStudents</h2>
+</div>
+
+</div>
+
+<div class="row myRow justify-content-center mySt">
+
+    <div class="col-3 rounded bg-light align-content-center ">
+        <ul>
+            <li class="list-unstyled style text-dark"><p></p>Start Date: @Model.CourseStart</li>
+            <li class="list-unstyled style text-dark">End Date: @Model.CourseEnd</li>
+        </ul>
+    </div>
+
+</div>

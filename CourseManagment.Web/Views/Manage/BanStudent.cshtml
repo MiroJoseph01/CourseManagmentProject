@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CourseManagment.Web.Models.ManageViewModels.BanStudentView>
+
+@{
+    ViewBag.Title = "BanStudent";
+}
+
+<header class="jumbotron text-center bg-dark text-light rounded-0"><h2> Ban Students </h2></header>
+<div class="row">
+    <div class="col-4"><h5>Student Name</h5></div>
+    <div class="col-4"><h5>Term</h5></div>
+    <div class="col-4"><h5>Option</h5></div>
+</div>
+
+@foreach (var i in Model)
+{
+    <div class="row">
+        <div class="col-4">@i.StudentName</div>
+        <div class="col-4">@i.Term</div>
+        <div class="col-4">
+            @{if (i.isBanned == false)
+                {
+                    using (Html.BeginForm("BanStudent", "Manage", FormMethod.Post))
+                    {
+                        <input type="hidden" name="StudentId" value=@i.StudentId>
+                        <input type="hidden" name="Pos" value=1>
+                        <input type="submit" value="Block" class="btn-link" />
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("BanStudent", "Manage", FormMethod.Post))
+                    {
+                        <input type="hidden" name="StudentId" value=@i.StudentId>
+                        <input type="hidden" name="Pos" value=0>
+                        <input type="submit" value="Unlock" class="btn-link" />
+                    }
+                    }
+                }
+        </div>
+    </div>
+}
+

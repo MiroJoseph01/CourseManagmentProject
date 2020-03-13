@@ -1,0 +1,138 @@
+﻿@model IEnumerable<CourseManagment.Web.Models.ManageViewModels.CoursesForStudents>
+<style type="text/css">
+    .spoiler_body {
+        display: none;
+        cursor: pointer;
+    }
+</style>
+<a href="" class="spoiler_links text-primary"><h2>Your Courses</h2></a>
+<div class="spoiler_body">
+
+    @{ if (Model.Count() > 0)
+        {
+            <h3>Your future courses</h3>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Lector</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>For term</th>
+
+                    </tr>
+                    @foreach (var i in Model)
+                    {
+                        if (i.Position == 1)
+                        {
+                            <tr>
+                                <td>@Html.ActionLink(i.CourseName, "FullCourse", "Home", new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-center text-dark" })</td>
+                                <td>
+                                    @Html.ActionLink(@i.Lecturer.FirstName + " " + @i.Lecturer.SecondName, "AboutLecturer", "Home",
+        new { id = i.Lecturer.LecturerId }, new { @class = "nav-link active text-center text-primary" })
+                                </td>
+                                <td>
+                                    @i.CourseStart
+                                </td>
+                                <td>
+                                    @i.CourseEnd
+                                </td>
+                                <td>
+                                    @i.ForTerm
+                                </td>
+
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+            <hr />
+            <h3>Your courses for now</h3>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Lector</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>For term</th>
+                    </tr>
+                </tbody>
+                @foreach (var i in Model)
+                {
+                    if (i.Position == 0)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(i.CourseName, "FullCourse", "Home", new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-center text-dark" })</td>
+                            <td>
+                                @Html.ActionLink(@i.Lecturer.FirstName + " " + @i.Lecturer.SecondName, "AboutLecturer", "Home",
+        new { id = i.Lecturer.LecturerId }, new { @class = "nav-link active text-center text-primary" })
+                            </td>
+                            <td>
+                                @i.CourseStart
+                            </td>
+                            <td>
+                                @i.CourseEnd
+                            </td>
+                            <td>
+                                @i.ForTerm
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </table>
+            <hr />
+            <h3>Courses that you have already passed</h3>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Lector</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>For term</th>
+                        <th>Mark</th>
+                    </tr>
+                    @foreach (var i in Model)
+                    {
+                        if (i.Position == -1)
+                        {
+                            <tr>
+                                <td>@Html.ActionLink(i.CourseName, "FullCourse", "Home", new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-center text-dark" })</td>
+                                <td>
+                                    @Html.ActionLink(@i.Lecturer.FirstName + " " + @i.Lecturer.SecondName, "AboutLecturer", "Home",
+        new { id = i.Lecturer.LecturerId }, new { @class = "nav-link active text-center text-primary" })
+                                </td>
+                                <td>
+                                    @i.CourseStart
+                                </td>
+                                <td>
+                                    @i.CourseEnd
+                                </td>
+                                <td>
+                                    @i.ForTerm
+                                </td>
+                                <td>
+                                    @{
+                                        if (i.Mark == null)
+                                        {<p>-</p>}
+                                        else
+                                        {<p>@i.Mark</p>}
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+            <hr />
+        }
+        else
+        {
+            <h3>You don't have courses yet!</h3>
+        }
+    }
+</div>

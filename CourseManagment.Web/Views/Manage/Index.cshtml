@@ -1,0 +1,204 @@
+﻿@model CourseManagment.Web.Models.IndexViewModel
+@{
+    ViewBag.Title = "Managment";
+}
+
+<header class="jumbotron text-center bg-dark text-light rounded-0"><h2> @ViewBag.Title </h2></header>
+@{ if (Model.isBanned == true)
+    {
+        <h1>You are blocked. Contact with admin!</h1>
+    }
+    else
+    {
+        <p class="text-success">@ViewBag.StatusMessage</p>
+        {
+            if (Model.Role != "admin")
+            {
+                <div>
+                    <h3 class=" text-dark">Hello, @Model.FirstName  @Model.SecondName!</h3>
+
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-4 text-center">
+                            <h3> Your Email:</h3>
+                            <i class="myMan">@Model.Email</i>
+                        </div>
+                        @{
+                            if (Model.Role == "student")
+                            {
+                                <div class="col-2 text-center">
+                                    <h3> Your Term:</h3>
+                                    <i class="myMan text-center">@Model.StudentTerm</i>
+                                </div>
+                            }
+                            if (Model.Role == "lecturer")
+                            {<div class="col-2 text-center">
+                                    <h3> Your Department:</h3>
+                                    <i class="myMan text-center">@Model.Department</i>
+                                </div>
+                            }
+                        }
+
+                        <div class="col-2 text-center">
+                            <h3> Your Status:</h3>
+                            <i class="myMan text-center">@Model.Role</i>
+                        </div>
+
+                        <div class="col-4 text-center">
+                            <h3> Password:</h3>
+                            @if (Model.HasPassword)
+                            {
+                                <i>@Html.ActionLink("Shange Password", "ChangePassword")</i>
+                            }
+                            else
+                            {
+                                <i>@Html.ActionLink("Создать", "SetPassword")</i>
+                            }
+                        </div>
+
+                    </div>
+                    @if (Model.Role == "lecturer")
+                    {<hr />
+                        if (!string.IsNullOrEmpty(Model.ImageName))
+                        {
+                            <div class="row myRow justify-content-center">
+                                <div class="img_wrap">
+                                    @Html.Raw($"<img style = 'width:inherit'class='img-fluid' alt={Model.ImageName} src=\"data:image/jpeg;base64,"
+                                                                                           + Convert.ToBase64String(Model.Image) + "\" />")
+                                </div>
+                            </div>
+                        }
+                        <hr />
+                        <div class="row justify-content-center ">
+
+                            <div class="col-10">
+                                <h3 class="text-center">Information</h3>
+                                @Model.Description
+                            </div>
+                        </div>
+                    }
+
+                    <br />
+                    <hr />
+                    @if (Model.Role == "student")
+                    {
+                        <div class="row justify-content-center">
+                            <div class="col-10">
+
+
+                                @Html.Action("Courses", new { id = Model.Id })
+
+                                @Html.Action("AddCourses", new { id = Model.Id })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Role == "lecturer")
+                    {
+                        <div class="row justify-content-center">
+                            <div class="col-10">
+
+                                @Html.Action("CoursesForLecturer", new { id = Model.Id })
+
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+
+
+            else
+            {<h3 class="myMan text-dark">Hello, Admin!</h3>
+
+                <hr />
+                <div class="row">
+                    <div class="col-7 text-center">
+                        <h3> Your Email:</h3>
+                        <i class="myMan">@Model.Email</i>
+                    </div>
+                    <div class="col-5 text-center">
+                        <h3> Password:</h3>
+                        @if (Model.HasPassword)
+                        {
+                            <i>@Html.ActionLink("Shange Password", "ChangePassword")</i>
+                        }
+                        else
+                        {
+                            <i>@Html.ActionLink("Создать", "SetPassword")</i>
+                        }
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-10">
+
+                        <a href="" class="spoiler_links text-primary"><h4>Departments</h4></a>
+                        <div class="spoiler_body">
+                            @Html.Action("Departments")
+                            @Html.Action("DelDep")
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-10">
+
+                        <a href="" class="spoiler_links text-primary"><h4>Lecturers</h4></a>
+                        <div class="spoiler_body">
+                            @Html.ActionLink("Create Lecturer", "CreateLec", "Manage")
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-10">
+
+                        <a href="" class="spoiler_links text-primary"><h4>Courses</h4></a>
+                        <div class="spoiler_body">
+                            <p>@Html.ActionLink("Create Course", "CreateCour", "Manage")</p>
+                            <p>@Html.ActionLink("Edit Courses/Delete", "CoursesForEdit", "Manage")</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-10">
+
+                        <a href="" class="spoiler_links text-primary"><h4>Students</h4></a>
+                        <div class="spoiler_body">
+                            <p>@Html.ActionLink("Block/Unblock student", "BanStudent", "Manage")</p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-10">
+
+                        <a href="" class="spoiler_links text-primary"><h4>Logs</h4></a>
+                        <div class="spoiler_body">
+                            <p>@Html.ActionLink("Look through Logs", "Logs", "Manage")</p>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        }
+    }
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.spoiler_links').click(function () {
+            $(this).parent().children('div.spoiler_body').toggle('normal');
+            return false;
+        });
+    });
+</script>

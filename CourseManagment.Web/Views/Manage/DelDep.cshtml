@@ -1,0 +1,39 @@
+﻿@model CourseManagment.Web.Models.ManageViewModels.ViewDelDep
+<style type="text/css">
+    .spoiler_body {
+        display: none;
+        cursor: pointer;
+    }
+</style>
+
+<div id="resultD">
+    <hr />
+
+    <div>
+        <h4>Delete </h4>
+        <hr />
+        <h5 class="text-danger">@ViewBag.Info</h5>
+        <h5>Be sure that this department isn't in use</h5>
+
+        @using (Ajax.BeginForm("DelDep", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "resultD" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            if (Model.departmentItems.Count() > 0)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SelectedDepId)
+                    @Html.DropDownListFor(m => m.SelectedDepId, Model.departmentItems)
+                    @Html.ValidationMessageFor(m => m.SelectedDepId)
+                </div>
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" />
+
+                </div>}
+            else
+            {
+                <h3>Its no Departments to delete</h3>
+            }
+        }
+    </div>
+</div>

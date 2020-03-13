@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CourseManagment.Web.Models.ManageViewModels.CourseForEdit>
+
+@{
+    ViewBag.Title = "CoursesForEdit";
+}
+<header class="jumbotron text-center bg-dark text-light rounded-0"><h2>Courses For Edit</h2></header>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>
+                Course Name
+            </th>
+            <th>
+                Lecturer
+            </th>
+            <th>
+                Options
+            </th>
+        </tr>
+        @foreach(var i in Model)
+        {
+            <tr>
+                <td>
+                    @i.CourseName
+                </td>
+                <td>
+                    @i.Lecturer.FirstName @i.Lecturer.SecondName
+                </td>
+                <td>
+                    @Html.ActionLink("Edit or Delete", "EditCourse", "Manage", new { id = i.CourseId }, new { @class = "nav-link active text-center text-dark" })
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

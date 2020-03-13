@@ -1,0 +1,37 @@
+﻿@model CourseManagment.Web.Infrastructure.IndexViewModel
+@using CourseManagment.Web.Helpers
+@{
+    ViewBag.Title = "Tags";
+}
+
+<header class="jumbotron bg-dark rounded-0 text-light">
+
+    <h1 class="text-center">Topic: @ViewBag.Topic</h1>
+</header>
+@foreach (var i in Model.Courses)
+{
+    <div class="row myRow">
+        <div class="col-9 rounded">
+            <h2>Course Title: @i.CourseName</h2>
+        </div>
+        <div class="col-3 rounded">
+            <h5>Start Date: @i.CourseStart</h5>
+            <h5>End Date: @i.CourseEnd</h5>
+        </div>
+    </div>
+    <div class="row myRow">
+        <div class="col-12 rounded">
+            <span> @i.Description</span>
+        </div>
+    </div>
+    <div class="row myRow">
+        <div class="col-3 rounded">
+            @Html.ActionLink("More...", "FullCourse", "Home", new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-center text-dark" })
+        </div>
+    </div>
+}
+    <div class="row myRow">
+
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("Tags", new { page = x }))
+
+    </div>

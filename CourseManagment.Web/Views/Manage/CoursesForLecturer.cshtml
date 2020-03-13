@@ -1,0 +1,111 @@
+﻿@model IEnumerable<CourseManagment.Web.Models.ManageViewModels.CoursesForLecturer>
+<style type="text/css">
+    .spoiler_body {
+        display: none;
+        cursor: pointer;
+    }
+</style>
+<h3>Lecturer Courses</h3>
+
+<hr />
+<div>
+    <a href="" class="spoiler_links text-primary"><h4>Shoul be rated</h4></a>
+    <div class="spoiler_body">
+        @{ if (Model.Where(x => x.Position == -2).Count() > 0)
+            {
+                foreach (var i in Model)
+                {
+
+                    if (i.Position == -2)
+                    {
+
+                        <h5> @Html.ActionLink("More about " + i.CourseName, "FullCourse", "Home",
+                            new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-left text-dark" }) </h5>
+                        <div> @Html.ActionLink("About Students", "MarksOfCourse", "Manage",
+                             new { id = i.CourseId.ToString(), position = i.Position }, new { @class = "nav-link active text-right text-primary" }) </div>
+                    }
+
+                }
+            }
+            else
+            {
+                { <h5>Nothing for now</h5>}
+            }
+        }
+    </div>
+</div>
+<hr />
+<div>
+    <a href="" class="spoiler_links text-primary"><h4>Furure Courses</h4></a>
+    <div class="spoiler_body">
+        @{ if (Model.Where(x => x.Position == 1).Count() > 0)
+            {
+                foreach (var i in Model)
+                {
+
+                    if (i.Position == 1)
+                    {
+
+                        <H5> @Html.ActionLink("More about " + i.CourseName, "FullCourse", "Home", new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-left text-dark" }) </H5>
+                        <div> @Html.ActionLink("About Students", "MarksOfCourse", "Manage", new { id = i.CourseId.ToString(), position = i.Position }, new { @class = "nav-link active text-right text-primary" }) </div>
+                    }
+
+                }
+            }
+            else
+            {
+                { <h5>Nothing for now</h5>}
+            }
+        }
+    </div>
+</div>
+<hr />
+<div>
+    <a href="" class="spoiler_links text-primary"><h4>Courses at Present</h4></a>
+    <div class="spoiler_body">
+        @{ if (Model.Where(x => x.Position == 0).Count() > 0)
+            {
+                foreach (var i in Model)
+                {
+
+                    if (i.Position == 0)
+                    {
+
+                        <H5> @Html.ActionLink("More about " + i.CourseName, "FullCourse", "Home", new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-left text-dark" }) </H5>
+                        <div> @Html.ActionLink("About Students", "MarksOfCourse", "Manage", new { id = i.CourseId.ToString(), position = i.Position }, new { @class = "nav-link active text-right text-primary" }) </div>
+                    }
+
+                }
+            }
+            else
+            {
+                { <h5>Nothing for now</h5>}
+            }
+        }
+    </div>
+</div>
+<hr />
+<div>
+    <a href="" class="spoiler_links text-primary"><h4>Past Courses</h4></a>
+    <div class="spoiler_body">
+        @{ if (Model.Where(x => x.Position == -1).Count() > 0)
+            {
+                foreach (var i in Model)
+                {
+
+                    if (i.Position == -1)
+                    {
+
+                        <H5> @Html.ActionLink("More about " + i.CourseName, "FullCourse", "Home", new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-left text-dark" }) </H5>
+                        <div> @Html.ActionLink("About Students", "MarksOfCourse", "Manage", new { id = i.CourseId.ToString(), position=i.Position }, new { @class = "nav-link active text-right text-primary" }) </div>
+                    }
+
+                }
+            }
+            else
+            {
+                { <h5>Nothing for now</h5>}
+            }
+        }
+    </div>
+</div>

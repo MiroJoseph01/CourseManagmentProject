@@ -1,0 +1,48 @@
+﻿@model CourseManagment.Web.Models.HomeViewModels.LecturerViewModel
+
+@{
+    ViewBag.Title = "AboutLecturer";
+}
+
+<header class="jumbotron bg-dark rounded-0 text-light">
+
+    <h1 class="text-center">@Model.FirstName @Model.SecondName</h1>
+</header>
+
+@if (!string.IsNullOrEmpty(Model.ImageName))
+{
+    <div class="row myRow justify-content-center">
+        <div class="img_wrap">
+            @Html.Raw($"<img style = 'width:inherit'class='img-fluid' alt={Model.ImageName} src=\"data:image/jpeg;base64,"
+                                     + Convert.ToBase64String(Model.Image) + "\" />")
+        </div>
+    </div>
+}
+
+
+<div class="row myRow">
+    <div class="col-12 rounded">
+        <span> @Model.Information </span>
+    </div>
+</div>
+<div class="row myRow">
+    <div class="col-3 rounded">
+        <span>Email: @Model.LecturerEmail </span>
+    </div>
+    <div class="col-3 rounded">
+        <span>Department: @Model.Department.DepartmentName </span>
+    </div>
+
+    <div class="col-6 rounded">
+        @foreach (var i in Model.Courses)
+        {
+            if (i.IsDeleted == false)
+            {
+                <p>@Html.ActionLink(i.CourseName, "FullCourse", "Home", new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-center text-dark bg-light" })</p>
+
+            }
+        }
+    </div>
+</div>
+
+

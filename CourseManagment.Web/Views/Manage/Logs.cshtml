@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CourseManagment.Web.Filters.ExceptionDetail>
+
+@{
+    ViewBag.Title = "Logs";
+}
+<style type="text/css">
+    .spoiler_body {
+        display: none;
+        cursor: pointer;
+    }
+</style>
+<header class="jumbotron text-center bg-dark text-light rounded-0"><h2>Logs</h2></header>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>
+                Exeption
+            </th>
+            <th>
+                Controller
+            </th>
+            <th>
+                Action
+            </th>
+            <th>
+                Stack Trace
+            </th>
+            <th>
+                Date
+            </th>
+        </tr>
+
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>
+                    @i.ExceptionMessage
+                </td>
+                <td>
+                    @i.ControllerName
+                </td>
+                <td>
+                    @i.ActionName
+                </td>
+                <td>
+                    <div class="row justify-content-center">
+                        <div class="col-10">
+
+                            <a href="" class="spoiler_links text-primary"><h4>More</h4></a>
+                            <div class="spoiler_body">
+                                @i.StackTrace
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+                <td>
+                    @i.Date
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.spoiler_links').click(function () {
+            $(this).parent().children('div.spoiler_body').toggle('normal');
+            return false;
+        });
+    });
+</script>

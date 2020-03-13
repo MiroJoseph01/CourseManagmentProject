@@ -1,0 +1,60 @@
+﻿@model  CourseManagment.Web.Models.ManageViewModels.CourseAddForStudentID
+<style type="text/css">
+    .spoiler_body {
+        display: none;
+        cursor: pointer;
+    }
+</style>
+<div>
+    <a href="" class="spoiler_links text-primary"><h2>Avaliable Courses</h2></a>
+    <b style="color:red">@ViewBag.Info</b>
+    <div class="spoiler_body">
+        @{
+            if (Model.Courses.Count > 0)
+            {
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Course Lector</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Add</th>
+
+                        </tr>
+
+                        @foreach (var i in Model.Courses)
+                        {
+                            <tr>
+                                <td>@Html.ActionLink(i.CourseName, "FullCourse", "Home", new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-center text-dark" })</td>
+                                <td>
+                                    @Html.ActionLink(@i.Lecturer.FirstName + " " + @i.Lecturer.SecondName, "AboutLecturer", "Home",
+                              new { id = i.Lecturer.LecturerId }, new { @class = "nav-link active text-center text-primary" })
+                                </td>
+                                <td>
+                                    @i.CourseStart
+                                </td>
+                                <td>
+                                    @i.CourseEnd
+                                </td>
+                                <td>
+                                    <form method="post" onSubmit="return confirm('Do you really want to join @i.CourseName up?');">
+                                        <input name="CourseId" type="hidden" value=@i.CourseId>
+                                        <input name="StudentId" type="hidden" value=@Model.Id>
+                                        <input type="submit" class="btn-link text-dark" value="Join up">
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <br />
+                <h3>We don't have courses for you now!</h3>
+            }
+        }
+    </div>
+
+</div>

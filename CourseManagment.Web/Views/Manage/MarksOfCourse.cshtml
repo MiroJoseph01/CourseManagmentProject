@@ -1,0 +1,94 @@
+﻿@model CourseManagment.Web.Models.ManageViewModels.Marks
+
+@{
+    /**/
+
+    ViewBag.Title = "MarksOfCourse";
+}
+
+<header class="jumbotron text-center bg-dark text-light rounded-0"><h2> @Model.CourseName </h2></header>
+<div class="row">
+    <div class="col-6"><h3>Start: @Model.CourseStart.ToLongDateString()</h3></div>
+    <div class="col-6"><h3>End: @Model.CourseEnd.ToLongDateString()</h3></div>
+</div>
+
+@if (Model.Position == -1)
+{
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>
+                    Student Name
+                </th>
+                <th>
+                    Mark
+                </th>
+            </tr>
+            @foreach (var i in Model.Students)
+            {
+                <tr>
+                    <td>@i.StudentName</td>
+                    <td>
+                        @{if (@i.Mark == null)
+                            {<p>--</p> }
+                            else
+                            { @i.Mark}
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (Model.Position == 1 || Model.Position == 0)
+{
+    if (Model.Students.Count > 0)
+    {
+        <h3>Students: </h3>
+        <ol>
+            @foreach (var i in Model.Students)
+            {
+                <li>@i.StudentName</li>
+            }
+        </ol>
+    }
+    else
+    { <h3>It's no students</h3>}
+}
+
+@if (Model.Position == -2)
+{<hr />
+    bool flag = false;
+    foreach (var i in Model.Students)
+    {
+        if (i.Mark == null) { flag = true; break; }
+    }
+    if (flag)
+    {
+        using (Html.BeginForm("MarksOfCourse", "Manage", FormMethod.Post))
+        {<h4>Enter value from 0 to 100</h4>
+            @Html.HiddenFor(m => m.CourseId)
+
+            for (int i = 0; i < Model.Students.Count; i++)
+            {
+                <div class="form-group col-5">
+                    @Html.DisplayFor(x => x.Students.ElementAt(i).StudentName);
+                    <input type="hidden" name="StudentId" id="StudentId" value=@Model.Students.ElementAt(i).StudentId />
+                    <input class="form-control" type="number"size="5" required name="StudentMark" id="StudentMark" />
+                </div>
+            }
+            <p><input type="submit" value="Send" /></p>
+        }
+    }
+    else
+    {<h3>Students: </h3>
+        <ol>
+            @foreach (var i in Model.Students)
+            {
+                <li>@i.StudentName: @i.Mark</li>
+            }
+        </ol>   }
+}
+
+

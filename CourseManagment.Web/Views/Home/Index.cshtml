@@ -1,0 +1,77 @@
+﻿@model CourseManagment.Web.Infrastructure.IndexViewModel
+@using CourseManagment.Web.Helpers
+@{
+    ViewBag.Title = "Home Page";
+}
+<style type="text/css">
+    .spoiler_body {
+        display: none;
+        cursor: pointer;
+    }
+</style>
+<header class="jumbotron bg-dark rounded-0 text-light">
+    <img class="float-left" height=100 width=150 src="~/Content/Images/wood-light-creative-space-68562.jpg" alt="education" />
+
+    <h1 class="text-center">Our Courses</h1>
+
+</header>
+@using (Html.BeginForm())
+{
+<div class="row justify-content-center">
+    <a href="" class="spoiler_links text-primary"><h4>Filters</h4></a>
+   
+        <div class="text-center col-4 mySt rounded text-dark  myFilter spoiler_body">
+            
+            <ul class="float-left">
+                <li class="list-unstyled  myLi">
+                    @Html.RadioButton("key", "1") - AZ
+                </li>
+                <li class="list-unstyled  myLi">
+                    @Html.RadioButton("key", "-1") - ZA
+                </li>
+                <li class="list-unstyled  myLi">
+                    @Html.RadioButton("key", "2") - Length Of Course
+                </li>
+            </ul>
+            <button class="btn-outline-light rounded bg-dark text-light" type="submit">Filter</button>
+        </div>
+    </div>
+    }
+
+    @foreach (var i in Model.Courses)
+    {
+
+        <div class="row myRow">
+            <div class="col-9 rounded">
+                <h2>Course Title: @i.CourseName</h2>
+            </div>
+            <div class="col-3 rounded">
+                <h5>Start Date: @i.CourseStart</h5>
+                <h5>End Date: @i.CourseEnd</h5>
+            </div>
+        </div>
+        <div class="row myRow">
+            <div class="col-12 rounded">
+                <span> @i.Description</span>
+            </div>
+        </div>
+        <div class="row myRow mySt">
+            <div class="col-3 rounded">
+                @Html.ActionLink("More...", "FullCourse", "Home", new { id = i.CourseId.ToString() }, new { @class = "nav-link active text-center text-dark" })
+            </div>
+        </div>
+    }
+
+    <div class="row myRow">
+
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('.spoiler_links').click(function () {
+            $(this).parent().children('div.spoiler_body').toggle('normal');
+            return false;
+        });
+    });
+    </script>
