@@ -241,6 +241,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\bg_404.png" />
     <Content Include="Content\Images\wood-light-creative-space-68562.jpg" />
+    <Content Include="Content\Images\photoeditorsdk-export.ico" />
     <Content Include="Content\Styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
