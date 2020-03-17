@@ -43,7 +43,16 @@ namespace CourseManagment.DAL.Repositories
 
         public void Update(Lecturer lecturer)
         {
-            db.Entry(lecturer).State = EntityState.Modified;
+            var lct = db.Lecturers.Where(x => x.LecturerId == lecturer.LecturerId).FirstOrDefault();
+            lct.FirstName = lecturer.FirstName;
+            lct.SecondName = lecturer.SecondName;
+            lct.Information = lecturer.Information;
+            lct.LecturerEmail = lecturer.LecturerEmail;
+            lct.Image = lecturer.Image;
+            lct.ImageName = lecturer.ImageName;
+            lct.Courses = lecturer.Courses;
+            lct.Department = lecturer.Department;
+            db.SaveChanges();
         }
 
         public void Delete(int id)

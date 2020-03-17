@@ -16,6 +16,7 @@ namespace CourseManagment.BLL.Services.Interfaces
         IEnumerable<LecturerDTO> GetLecturers();
         LecturerDTO GetLecturer(int? id);
         void AddLecturer(LecturerDTO lecturerDTO, int depId);
+        void EditLecturer(LecturerDTO lecturerDTO, int depId);
         void Dispose();
     }
 }

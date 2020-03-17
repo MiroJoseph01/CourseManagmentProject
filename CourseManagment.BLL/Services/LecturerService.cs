@@ -16,7 +16,7 @@ namespace CourseManagment.BLL.Services
     /// Class LecturerService
     /// implements interface ILecturerService and methods from it
     /// </summary>
-    public class LecturerService:ILecturerService
+    public class LecturerService : ILecturerService
     {
         IUnitOfWork Database { get; set; }
 
@@ -50,7 +50,9 @@ namespace CourseManagment.BLL.Services
 
             return mapper.Map<LecturerDTO>(Database.Lecturers.Get(id.Value));
         }
-            
+
+
+       
         public void AddLecturer(LecturerDTO lecturerDTO, int depId)
         {
             var dep = Database.Departments.Get(depId);
@@ -66,6 +68,30 @@ namespace CourseManagment.BLL.Services
             };
             Database.Lecturers.Create(lecturer);
             Database.Save();
+        }
+
+        /// <summary>
+        /// Method EditLecturer 
+        /// is used to edit Lecturer in database
+        /// </summary>
+        /// <param name="lecturerDTO"></param>
+        /// <param name="depId">Department Id</param>
+        public void EditLecturer(LecturerDTO lecturerDTO, int depId)
+        {
+            var dep = Database.Departments.Get(depId);
+            Lecturer lecturer = new Lecturer
+            {
+                FirstName = lecturerDTO.FirstName,
+                SecondName = lecturerDTO.SecondName,
+                LecturerId = lecturerDTO.LecturerId,
+                Department = dep,
+                Information = lecturerDTO.Information,
+                Image = lecturerDTO.Image,
+                ImageName = lecturerDTO.ImageName,
+                LecturerEmail = lecturerDTO.LecturerEmail,
+                Courses = Database.Lecturers.Get(lecturerDTO.LecturerId).Courses
+            };
+            Database.Lecturers.Update(lecturer);
         }
 
         public void Dispose()

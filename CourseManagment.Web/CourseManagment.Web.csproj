@@ -224,6 +224,8 @@
     <Compile Include="Models\ManageViewModels\CreateCourse.cs" />
     <Compile Include="Models\ManageViewModels\CreateLec.cs" />
     <Compile Include="Models\ManageViewModels\EditCours.cs" />
+    <Compile Include="Models\ManageViewModels\EditLec.cs" />
+    <Compile Include="Models\ManageViewModels\LecturersForEdit.cs" />
     <Compile Include="Models\ManageViewModels\Marks.cs" />
     <Compile Include="Models\ManageViewModels\StudentMark.cs" />
     <Compile Include="Models\ManageViewModels\UserViewModel.cs" />
@@ -414,6 +416,8 @@
     <Content Include="Views\Manage\BanStudent.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Manage\Logs.cshtml" />
+    <Content Include="Views\Manage\LecturersForEdit.cshtml" />
+    <Content Include="Views\Manage\EditLec.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

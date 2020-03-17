@@ -1001,10 +1001,10 @@ namespace CourseManagment.Web.Controllers
         public ActionResult CoursesForEdit()
         {
             var coursesDTO = courseService.GetCourses();
-            List<CourseForEdit> res = new List<CourseForEdit>();
+            List<LecturerForEdit> res = new List<LecturerForEdit>();
             foreach (var i in coursesDTO)
             {
-                res.Add(new CourseForEdit
+                res.Add(new LecturerForEdit
                 {
                     CourseId = i.CourseId,
                     CourseName = i.CourseName,
@@ -1109,6 +1109,117 @@ namespace CourseManagment.Web.Controllers
 
             }
             return View(editCourse);
+
+        }
+
+        //GET: /Manage/LecturersForEdit
+        //Upload page all Lecturers to choose one for editing
+        [ExceptionLogger]
+        public ActionResult LecturersForEdit()
+        {
+            var lecturersDTO = lecturerService.GetLecturers();
+            List<LecturersForEdit> res = new List<LecturersForEdit>();
+            foreach (var i in lecturersDTO)
+            {
+                res.Add(new LecturersForEdit
+                {
+                    LecturerId = i.LecturerId,
+                    LecturerName = i.FirstName + " " + i.SecondName,
+                    Department = i.Department
+                });
+            }
+            res.OrderBy(x => x.LecturerName);
+            return View(res);
+        }
+
+        //GET: /Manage/EditLec
+        //Upload page to edit Lecturer
+        public ActionResult EditLec(int? id)
+        {
+            if (id == null)
+                throw new ValidationException("id doesn't exist", "");
+
+            var lec = lecturerService.GetLecturer(id.Value);
+            if (lec == null)
+                throw new ValidationException("course doesn't exist", "");
+            string res = "";
+
+            var dep = departmentService.GetDepartments();
+            EditLec editLec= new EditLec
+            {
+                LecturerId = id.Value,
+                FirstName = lec.FirstName,
+                SecondName=lec.SecondName,
+                Image=lec.Image,
+                ImageName=lec.ImageName,
+                Information=lec.Information,
+                departments=dep.ToList(),
+                LecturerEmail=lec.LecturerEmail,
+                
+            };
+
+            return View(editLec);
+        }
+
+        //POST: /Manage/EditLec
+        //Upload page to edit Lecturer
+        [HttpPost]
+        public ActionResult EditLec(EditLec editLec, HttpPostedFileBase uploadImage)
+        {
+            editLec.departments = departmentService.GetDepartments().ToList();
+
+            if (ModelState.IsValid)
+            {
+                byte[] img;
+                if (uploadImage == null)
+                {
+                    img = courseService.GetCourse(editLec.LecturerId).Image;
+                }
+                else
+                {
+                    byte[] imageData = null;
+                    using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+                    {
+                        imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
+                    }
+                    img = imageData;
+                }
+
+
+                ApplicationUserManager userManager = HttpContext.GetOwinContext()
+                                            .GetUserManager<ApplicationUserManager>();
+                try
+                {
+                    lecturerService.EditLecturer(new LecturerDTO
+                    {
+                        LecturerId = editLec.LecturerId,
+                        Information = editLec.Information,
+                        FirstName = editLec.FirstName,
+                        SecondName = editLec.SecondName,
+                        Image = img,
+                        ImageName=editLec.FirstName+" "+editLec.SecondName,
+                        LecturerEmail=editLec.LecturerEmail
+
+                    }, editLec.SelectedDepId);
+                    var user = UserManager.FindByEmail(editLec.LecturerEmail);
+                    user.UserName = editLec.FirstName + " " + editLec.SecondName;
+                    userManager.Update(user);
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                if (ModelState.IsValid)
+                    return Redirect("/Manage/Index");
+                else
+                {
+                    editLec.departments = departmentService.GetDepartments().ToList();
+                    return View(editLec);
+                }
+
+            }
+            return View(editLec);
+
 
         }
 

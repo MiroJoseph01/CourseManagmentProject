@@ -11,7 +11,7 @@ namespace CourseManagment.Web.Models.ManageViewModels
     /// declares properties to show needed information 
     /// about Courses to choose for editing
     /// </summary>
-    public class CourseForEdit
+    public class LecturerForEdit
     {
         public int CourseId { get; set; }
         public string CourseName { get; set; }

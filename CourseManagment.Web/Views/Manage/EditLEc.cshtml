@@ -1,0 +1,76 @@
+﻿@model CourseManagment.Web.Models.ManageViewModels.EditLec
+
+@{
+    ViewBag.Title = "Edit Lecturer";
+}
+
+<header class="jumbotron text-center bg-dark text-light rounded-0">
+    <h2>Edit Lecturer</h2></header>
+
+
+    @using (Html.BeginForm("EditLec", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {@Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.HiddenFor(model => model.LecturerId)
+            @Html.HiddenFor(model=>model.LecturerEmail)
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SecondName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SecondName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SecondName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <div class="editor-label">Add photo</div>
+                <div class="editor-field">
+                    <input type="file" name="uploadImage" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Information, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Information, 10, 80, null)
+                @Html.ValidationMessageFor(model => model.Information, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedDepId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.SelectedDepId, Model.departmentItems)
+                @Html.ValidationMessageFor(m => m.SelectedDepId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
