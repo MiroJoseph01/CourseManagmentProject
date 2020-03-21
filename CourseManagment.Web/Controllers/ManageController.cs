@@ -1001,10 +1001,10 @@ namespace CourseManagment.Web.Controllers
         public ActionResult CoursesForEdit()
         {
             var coursesDTO = courseService.GetCourses();
-            List<LecturerForEdit> res = new List<LecturerForEdit>();
+            List<CourseForEdit> res = new List<CourseForEdit>();
             foreach (var i in coursesDTO)
             {
-                res.Add(new LecturerForEdit
+                res.Add(new CourseForEdit
                 {
                     CourseId = i.CourseId,
                     CourseName = i.CourseName,

@@ -5,11 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<header class="jumbotron text-center bg-dark text-light rounded-0"><h2> @ViewBag.Title </h2></header>
 
 <hr />
 @using (Html.BeginForm("CreateLec", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <h4>Create </h4>
+
 
     @Html.AntiForgeryToken()
 

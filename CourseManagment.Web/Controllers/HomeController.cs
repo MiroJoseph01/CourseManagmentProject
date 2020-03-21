@@ -70,7 +70,7 @@ namespace CourseManagment.Web.Controllers
             else
                 orderedCourses = courses.OrderByDescending(x => x.CourseStart);
 
-            int pageSize = 2;
+            int pageSize = 3;
             IEnumerable<CourseViewModel> coursesPerPages = orderedCourses.Skip((page - 1) * pageSize).Take(pageSize);
             PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = courses.Count };
             if (pageInfo.TotalPages < page || page <= 0)
