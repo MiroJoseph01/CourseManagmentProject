@@ -12,3 +12,17 @@ C:\Users\user\source\repos\CourseManagment.Web\CourseManagment.DAL\obj\Debug\Cou
 C:\Users\user\source\repos\CourseManagment.Web\CourseManagment.DAL\obj\Debug\CourseManagment.DAL.csproj.CopyComplete
 C:\Users\user\source\repos\CourseManagment.Web\CourseManagment.DAL\obj\Debug\CourseManagment.DAL.dll
 C:\Users\user\source\repos\CourseManagment.Web\CourseManagment.DAL\obj\Debug\CourseManagment.DAL.pdb
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\bin\Debug\CourseManagment.DAL.dll.config
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\bin\Debug\CourseManagment.DAL.dll
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\bin\Debug\CourseManagment.DAL.pdb
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\bin\Debug\EntityFramework.dll
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\bin\Debug\EntityFramework.xml
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\obj\Debug\CourseManagment.DAL.csprojAssemblyReference.cache
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\obj\Debug\CourseManagment.DAL.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\obj\Debug\CourseManagment.DAL.csproj.CopyComplete
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\obj\Debug\CourseManagment.DAL.dll
+C:\Users\user\source\repos\CourseManagmentProject\CourseManagment.DAL\obj\Debug\CourseManagment.DAL.pdb

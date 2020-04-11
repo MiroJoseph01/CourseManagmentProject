@@ -108,9 +108,6 @@ header img{
 }
 
 h1,h2,h3,h4,h5{
-    font-size:10vw;
+    font-size:0.5vw;
 }
-div{font-size:4vw;}
-p {
-    font-size: 4vw;
-}
+
